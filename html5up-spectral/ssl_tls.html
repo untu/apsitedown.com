@@ -56,30 +56,32 @@
 
 								<p>Secure Sockets Layer and its successor Transport Layer Security are cryptographic protocols that secure communications between your customer web browser and your server.</p>
 
-								<p>Every time someone opens your website (e.g. following the link or entering its address in Google Chrome), his/her web browser asks DNS: </p>
+								<p>Every time someone opens your website (e.g. following the link or entering its address in Google Chrome), his/her web browser gets the IP-address of your server from <a href="dns.html">DNS</a>, builds TCP-connection and begins the conversation:</p>
 								
 								<blockquote>
-									- Please, give me an IP-address for this URL - apsitedown.com
+									- Hello, 192.30.252.153 (apsitedown.com)! Let's proceed with encryption? I can do SSL/TLS.
 									<br />
-									- Here you are - 192.30.252.153
+									- Me to! Here is my certificate! (* sends its certificate)
 									<br />
-									- Thanks!
+									- Let's see... (* checks the certificate) It seems to be trusted and valid! ....0...s..&b0!../..4-W...7.Qf."......*._.G..,..e.w@*
+									<br />
+									- ................/..........X...<.....<.P{.q.;..'ux.. l...{]R........jt.{=....z...c/...[Ic.S.W.'7..f.MFY-.9.y.IM...4.I.1r.{AF7...<.o..u../.....,...%.#.n....B........R.%...4....
 								</blockquote>
 
-								<p>Starting this moment all requests and data between visitor's web browser and your server are going to be passed using this IP-address.</p>
+								<p>Starting this moment all requests and data between visitor's web browser and your server are going to be encrypted.</p>
 
 								<hr />
 
 								<h4>So what's the problem?</h4>
-								<p><b>Domain Name expires. Soon or later.</b></p>
+								<p><b>SSL/TLS certificates expire. Soon or later.</b></p>
 								<p>
-								Actually, the domain name (or "web address") of your website is not your perpetual property. You lease it at the domain name registrator and pay for its prolongation periodically. If the payment is delayed (or forgot) the DNS does not provide the IP-address of your web-server to the user's web-browser and you lose customer because of "Server not found" message.
+								SSL/TLS certificate is limited in time. You buy it from your domain name registrator or another provider (e.g. GoDaddy, Thawte, Verisign, Comodo, etc.) and need to pay for its prolongation periodically. If the payment is delayed (or forgot) the cert becomes invalid and you lose customer because of "Connection is not secure" or "Phishing attack" messages in his/her browser.
 								</p>
 
-								<h4>What is your offer?</h4>
+								<h4>What is your approach?</h4>
 								<p><b>Notification before expiration</b></p>
 								<p>
-								apSiteDown checks the expiration date of your DNS-record and notifies you:
+								apSiteDown checks the expiration date of your SSL/TLS-cert and notifies you:
 								<ul>
 									<li>30 days before the expiration;</li>
 									<li>10 days before the expiration;</li>
@@ -116,7 +118,7 @@
 							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 						</ul>
 						<ul class="copyright" style="text-transform:initial; letter-spacing:unset">
-							<li>&copy; apSiteDown</li><li>Powered by <a href="https://saymon.info/en-version/">SAYMON</a></li>
+							<li>&copy; apSiteDown</li>
 						</ul>
 					</footer>
 

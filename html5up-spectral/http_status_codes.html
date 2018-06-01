@@ -73,7 +73,7 @@
 
 								<p><b>401 - Unauthorized</b>
 								<br />
-								Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource. See Basic access authentication and Digest access authentication.[34] 401 semantically means "unauthenticated",[35] i.e. the user does not have the necessary credentials. Note: Some sites issue HTTP 401 when an IP address is banned from the website (usually the website domain) and that specific address is refused permission to access a website
+								Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource. 401 semantically means "unauthenticated", i.e. the user does not have the necessary credentials.
 								</p>
 
 								<p><b>403 - Forbidden</b>
@@ -88,7 +88,7 @@
 
 								<p><b>408 - Request Timeout</b>
 								<br />
-								The server timed out waiting for the request. According to HTTP specifications: "The client did not produce a request within the time that the server was prepared to wait. The client MAY repeat the request without modifications at any later time."
+								The server timed out waiting for the request.
 								</p>
 
 								<p><b>500 - Internal Server Error</b>
@@ -109,6 +109,28 @@
 								<p><b>504 - Gateway Timeout</b>
 								<br />
 								The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+								</p>
+
+								<h4>So what's the problem?</h4>
+								<p><b>There is a lot of reasons for the unexpected outage.</b></p>
+								<p>
+								Here is the just a short list of the possible reasons:
+								<ul>
+									<li>DNS expiration;</li>
+									<li>SSL/TLS expiration;</li>
+									<li>server overload due DDoS-attack;</li>
+									<li>no space left on HDD/SSD;</li>
+									<li>ISP problems;</li>
+									<li>and many more.</li>
+								</ul>
+								</p>
+
+								<h4>What is your approach?</h4>
+								<p><b>Distributed availability monitoring and real-time notifications.</b></p>
+								<p>
+								apSiteDown checks the availability of your website or service from different places all over the world, gets HTTP Status Code and notifies you if it differs from "200 - OK".
+								</p><p>								
+								If this notification policy does not suit your requirements or business processes, it can be changed withing our <a href="custom_checks.html">Custom Check</a> offer.
 								</p>
 
 							</div>
@@ -139,7 +161,7 @@
 							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 						</ul>
 						<ul class="copyright" style="text-transform:initial; letter-spacing:unset">
-							<li>&copy; apSiteDown</li><li>Powered by <a href="https://saymon.info/en-version/">SAYMON</a></li>
+							<li>&copy; apSiteDown</li>
 						</ul>
 					</footer>
 
