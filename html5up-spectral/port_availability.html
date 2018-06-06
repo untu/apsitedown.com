@@ -38,8 +38,8 @@
 				<!-- Main -->
 					<article id="main">
 						<header>
-							<h2>HTTP Status Code and Text</h2>
-							<p>The list of the most common/general http status codes and texts</p>
+							<h2>Port availability</h2>
+							<p>A different port for each service</p>
 							<ul class="actions">
 								<li><a href="instant_check.html" class="button special">Run Instant Check</a></li>
 							</ul>
@@ -47,82 +47,43 @@
 						<section class="wrapper style5">
 							<div class="inner">
 
-								<h3>What is HTTP Status Code and Text</h3>
+								<h3>What is Port</h3>
 
-								<p>HTTP Status Code is a numeric status code (such as "404") in the first line of the HTTP response (the status line) that indicates the health of the web-server or availability of the requested resources.</p>
+								<blockquote>
+									In computer networking, a port is an endpoint of communication in an operating system, which identifies a specific process or a type of network service running on that system. <br />
+									<sub>[From <a href="https://en.wikipedia.org/wiki/Port_(computer_networking)" target="_blank">Wikipedia</a>, the free encyclopedia]</sub>
+								</blockquote>
+
+								<p>Every network service on your server uses its own port. HTTP-service (that is responsible for your website functionality) generally uses port 80, so when someone enters URL of your website, e.g. http://apsitedown.com, his/her browser adds :80 and try to establish connection to http://apsitedown.com:80.</p>
 
 								<p>HTTP Status Text is a textual reason phrase (such as "Not Found") in the first line of the HTTP response (the status line) that describes the numeric status code.</p>
 
 								<hr />
 
-								<h4>The most common codes</h4>
-								<p><b>200 - OK</b>
-								<br />
-								Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request, the response will contain an entity describing or containing the result of the action.
-								</p>
-
-								<p><b>301 - Moved Permanently</b>
-								<br />
-								This and all future requests should be directed to the given URI.
-								</p>
-
-								<p><b>400 - Bad Request</b>
-								<br />
-								The server cannot or will not process the request due to an apparent client error (e.g., malformed request syntax, size too large, invalid request message framing, or deceptive request routing).
-								</p>
-
-								<p><b>401 - Unauthorized</b>
-								<br />
-								Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource. 401 semantically means "unauthenticated", i.e. the user does not have the necessary credentials.
-								</p>
-
-								<p><b>403 - Forbidden</b>
-								<br />
-								The request was valid, but the server is refusing action. The user might not have the necessary permissions for a resource, or may need an account of some sort.
-								</p>
-
-								<p><b>404 - Not Found</b>
-								<br />
-								The requested resource could not be found but may be available in the future. Subsequent requests by the client are permissible.
-								</p>
-
-								<p><b>408 - Request Timeout</b>
-								<br />
-								The server timed out waiting for the request.
-								</p>
-
-								<p><b>500 - Internal Server Error</b>
-								<br />
-								A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
-								</p>
-
-								<p><b>502 - Bad Gateway</b>
-								<br />
-								The server was acting as a gateway or proxy and received an invalid response from the upstream server.
-								</p>
-
-								<p><b>503 - Service Unavailable</b>
-								<br />
-								The server is currently unavailable (because it is overloaded or down for maintenance). Generally, this is a temporary state.
-								</p>
-
-								<p><b>504 - Gateway Timeout</b>
-								<br />
-								The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+								<h4>The most common ports</h4>
+								<p>
+									Here is the list of the most common ports. These are default values, that can be reassigned, redefined or reconfigured on your server. <br /><br />
+									<b>20/21 - FTP</b> - File Transfer Protocol to upload and download files.<br />
+									<b>22 - SSH</b> - Secure Shell to connect to the command-line of your server.<br />
+									<b>25 - SMTP</b> - Simple Mail Transfer Protocol to send emails.<br />
+									<b>80 - HTTP</b> - Hypertext Transfer Protocol to maintain http:// websites.<br />
+									<b>110 - POP3</b> - Post Office Protocol to receive emails.<br />
+									<b>143 - IMAP</b> - Internet Message Access Protocol to send and receive emails.<br />
+									<b>161 - SNMP</b> - Simple Network Management Protocol to send SNMP-Traps<br />
+									<b>443 - HTTPS</b> - HTTP over SSL/TLS (HTTP Secure) to maintain https:// websites.
 								</p>
 
 								<hr />
 
 								<h4>So what's the problem?</h4>
-								<p><b>There is a lot of reasons for the unexpected outage.</b></p>
+								<p><b>The port unavailability on your server = the service unavailability for your customers.</b></p>
 								<p>
-								Here is just the short list of the possible reasons:
+								Here are several possible reasons of unexpected outage of the service and port unavailability:
 								<ul>
-									<li>DNS expiration;</li>
-									<li>SSL/TLS expiration;</li>
-									<li>server overload due DDoS-attack;</li>
-									<li>no space left on HDD/SSD;</li>
 									<li>ISP (Internet Service Provider) problems;</li>
+									<li>service software updates;</li>
+									<li>firewall reconfiguration;</li>
+									<li>network router reconfiguration;</li>
 									<li>and many more.</li>
 								</ul>
 								</p>
@@ -132,10 +93,10 @@
 								<h4>What is your approach?</h4>
 								<p><b>Distributed availability monitoring and real-time notifications.</b></p>
 								<p>
-								apSiteDown checks the availability of your website or service from different places all over the world, gets HTTP Status Code and notifies you if it differs from "200 - OK".
+								apSiteDown checks the availability of mission-critical ports of your server from different places over the world, so you could be confident the service is accessible for your customers globally.
 								</p>
 								<p>								
-								If this notification policy does not suit your requirements or business processes (e.g. <i>"200 - OK"</i> is abnormal for some pages, while <i>"401 - Unauthorized"</i> is actually fine), it can be changed withing our <a href="custom_checks.html">Custom Check</a> offer.
+								Port monitoring is not available by default, but we are ready to setup it for you withing our <a href="custom_checks.html">Custom Check</a> offer.
 								</p>
 
 							</div>
