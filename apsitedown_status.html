@@ -1,0 +1,945 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120800162-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-120800162-1');
+		</script>
+		<title>apSiteDown - Current Service Status</title>
+		<meta name="description" content="Current status of apSiteDown services">
+		<meta name="keywords" content="website, monitoring, down, ssl, dns, availability, response time">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+	</head>
+
+	<body class="landing">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="index.html">apSiteDown</a></h1>
+						<nav id="nav">
+							<ul>
+								<!-- <li class="special">
+									<a href="#menu">Log In</a>
+								</li> -->
+								<li class="special">
+									<a href="signup.html">Sign Up</a>
+								</li>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="pricing.html">Pricing</a></li>
+											<li><a href="resources.html">Resources</a></li>
+											<li><a href="contacts.html">Support</a></li>
+											<li><a href="apsitedown_status.html">apSiteDown Status</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+					<section id="three" class="wrapper style3 special">
+						<div class="inner">
+							<header class="major">
+								<h2>apSiteDown Status</h2>
+								<p>Current status of apSiteDown.com website.</p>
+							</header>
+							<ul class="features">
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (UK1)</a></h3>
+									<p></p>
+
+									<canvas id="myLineChart_rtuk1" width="100%" height="100%"></canvas>
+									<script>
+										// Get a date object for the current time
+										var d = new Date();
+										// Set it to 7 days ago
+										d.setDate(d.getDate() - 6);
+										// Zero the hours
+										d.setHours(0, 0, 0);
+										// Zero the milliseconds
+										d.setMilliseconds(0);
+										// Get the time value in milliseconds and convert to seconds
+										// console.log(d/1000|0);
+										// console.log(d/1 +' - '+ d);
+
+										var d6 = new Date();
+										d6.setDate(d6.getDate() - 6);
+										d6.setMonth(d6.getMonth() + 1);
+										d6.setFullYear(d6.getFullYear());
+										d6.setHours(0, 0, 0);
+										var d5 = new Date();
+										d5.setDate(d5.getDate() - 5);
+										d5.setMonth(d5.getMonth() + 1);
+										d5.setFullYear(d5.getFullYear());
+										d5.setHours(0, 0, 0);
+										var d4 = new Date();
+										d4.setDate(d4.getDate() - 4);
+										d4.setMonth(d4.getMonth() + 1);
+										d4.setFullYear(d4.getFullYear());
+										d4.setHours(0, 0, 0);
+										var d3 = new Date();
+										d3.setDate(d3.getDate() - 3);
+										d3.setMonth(d3.getMonth() + 1);
+										d3.setFullYear(d3.getFullYear());
+										d3.setHours(0, 0, 0);
+										var d2 = new Date();
+										d2.setDate(d2.getDate() - 2);
+										d2.setMonth(d2.getMonth() + 1);
+										d2.setFullYear(d2.getFullYear());
+										d2.setHours(0, 0, 0);
+
+										$.ajax({
+										  url: 'https://saas.saymon.info/node/api/objects/5b212f591b77787888a80264/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  success: callback,
+										  dataType: "json"
+										});
+
+										function callback(data, textStatus, jqXHR){
+											//console.log(data[0].dps[0][1]|0);
+											//console.log(data[0].dps);
+											
+											//v1 to get length
+											//console.log(Object.keys(data[0].dps).length);
+											//v2 to get length
+											length=0;
+											$.each(data[0].dps,function(i){
+											  length++;
+											});
+											//console.log(length);
+
+											var arr6daysago = [];
+											for (var i = 0; i <= 23; i++) {arr6daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr6daysago - '+arr6daysago);
+											var arr5daysago = [];
+											for (var i = 24; i <= 47; i++) {arr5daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr5daysago - '+arr5daysago);
+											var arr4daysago = [];
+											for (var i = 48; i <= 71; i++) {arr4daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr4daysago - '+arr4daysago);
+											var arr3daysago = [];
+											for (var i = 72; i <= 95; i++) {arr3daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr3daysago - '+arr3daysago);
+											var arr2daysago = [];
+											for (var i = 96; i <= 119; i++) {arr2daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr2daysago - '+arr2daysago);		
+											var yesterday = [];
+											for (var i = 120; i <= 143; i++) {yesterday.push(data[0].dps[i][1]|0);};
+											//console.log('yesterday - '+yesterday);
+											var today = [];
+											for (var i = 144; i <= length-1; i++) {today.push(data[0].dps[i][1]|0);};
+											//console.log('today - '+today);
+
+											var ctx = document.getElementById("myLineChart_rtuk1").getContext('2d');
+											var myLineChart_rtuk1 = new Chart(ctx, {
+											    type: 'line',
+											    data: {
+											        labels:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+											        datasets: [{
+											            label: 'today',
+											            data: today,	
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['#00ffcc'],
+											            borderWidth: 1.5
+											        },
+											        {
+											            label: 'yesterday',
+											            data: yesterday,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.9
+											        },
+											        {
+											            label: d2.getDate() + '/' + d2.getMonth() + '/' + d2.getFullYear(),
+											            data: arr2daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.8
+											        },
+											        {
+											            label: d3.getDate() + '/' + d3.getMonth() + '/' + d3.getFullYear(),
+											            data: arr3daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.7
+											        },
+											        {
+											            label: d4.getDate() + '/' + d4.getMonth() + '/' + d4.getFullYear(),
+											            data: arr4daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.6
+											        },
+											        {
+											            label: d5.getDate() + '/' + d5.getMonth() + '/' + d5.getFullYear(),
+											            data: arr5daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.5
+											        },
+											        {
+											            label: d6.getDate() + '/' + d6.getMonth() + '/' + d6.getFullYear(),
+											            data: arr6daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.4
+											        }]
+											    },
+											    options: {
+											    	legend: {
+											    		display: true,
+											    		position: 'top',
+											    		fullWidth: false,
+											    		labels: {
+											                fontColor: '#aaa',
+											                fontSize: 10,
+											                fontStyle: 'normal',
+											                usePointStyle: true
+									 		           }
+											    	},
+											    	tooltips: {
+											    		enabled: true,
+											    		mode: 'nearest',
+											    		displayColors: false,
+											    		titleFontSize: 0,
+											    		titleMarginBottom: 0
+											    	},
+											    	scales: {
+											            xAxes: [{
+											                display: false
+											            }],
+											            yAxes: [{
+											                display: false
+											            }]
+											        },
+											        elements: {
+											        	point: {
+											        		pointStyle: 'circle',
+											        		radius: 2,
+											        		//borderWidth: 0.5
+											        		hitRadius: 10,
+											        		hoverRadius: 2
+											        	}
+											        }
+											    }
+											});
+										};
+									</script>
+								</li>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (UK2)</a></h3>
+									<p></p>
+
+									<canvas id="myLineChart_rtuk2" width="100%" height="100%"></canvas>
+									<script>
+										// Get a date object for the current time
+										var d = new Date();
+										// Set it to 7 days ago
+										d.setDate(d.getDate() - 6);
+										// Zero the hours
+										d.setHours(0, 0, 0);
+										// Zero the milliseconds
+										d.setMilliseconds(0);
+										// Get the time value in milliseconds and convert to seconds
+										// console.log(d/1000|0);
+										// console.log(d/1 +' - '+ d);
+
+										var d6 = new Date();
+										d6.setDate(d6.getDate() - 6);
+										d6.setMonth(d6.getMonth() + 1);
+										d6.setFullYear(d6.getFullYear());
+										d6.setHours(0, 0, 0);
+										var d5 = new Date();
+										d5.setDate(d5.getDate() - 5);
+										d5.setMonth(d5.getMonth() + 1);
+										d5.setFullYear(d5.getFullYear());
+										d5.setHours(0, 0, 0);
+										var d4 = new Date();
+										d4.setDate(d4.getDate() - 4);
+										d4.setMonth(d4.getMonth() + 1);
+										d4.setFullYear(d4.getFullYear());
+										d4.setHours(0, 0, 0);
+										var d3 = new Date();
+										d3.setDate(d3.getDate() - 3);
+										d3.setMonth(d3.getMonth() + 1);
+										d3.setFullYear(d3.getFullYear());
+										d3.setHours(0, 0, 0);
+										var d2 = new Date();
+										d2.setDate(d2.getDate() - 2);
+										d2.setMonth(d2.getMonth() + 1);
+										d2.setFullYear(d2.getFullYear());
+										d2.setHours(0, 0, 0);
+
+										$.ajax({
+										  url: 'https://saas.saymon.info/node/api/objects/5b212f5a1b77787888a8038f/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  success: callback,
+										  dataType: "json"
+										});
+
+										function callback(data, textStatus, jqXHR){
+											//console.log(data[0].dps[0][1]|0);
+											//console.log(data[0].dps);
+											
+											//v1 to get length
+											//console.log(Object.keys(data[0].dps).length);
+											//v2 to get length
+											length=0;
+											$.each(data[0].dps,function(i){
+											  length++;
+											});
+											//console.log(length);
+
+											var arr6daysago = [];
+											for (var i = 0; i <= 23; i++) {arr6daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr6daysago - '+arr6daysago);
+											var arr5daysago = [];
+											for (var i = 24; i <= 47; i++) {arr5daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr5daysago - '+arr5daysago);
+											var arr4daysago = [];
+											for (var i = 48; i <= 71; i++) {arr4daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr4daysago - '+arr4daysago);
+											var arr3daysago = [];
+											for (var i = 72; i <= 95; i++) {arr3daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr3daysago - '+arr3daysago);
+											var arr2daysago = [];
+											for (var i = 96; i <= 119; i++) {arr2daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr2daysago - '+arr2daysago);		
+											var yesterday = [];
+											for (var i = 120; i <= 143; i++) {yesterday.push(data[0].dps[i][1]|0);};
+											//console.log('yesterday - '+yesterday);
+											var today = [];
+											for (var i = 144; i <= length-1; i++) {today.push(data[0].dps[i][1]|0);};
+											//console.log('today - '+today);
+
+											var ctx = document.getElementById("myLineChart_rtuk2").getContext('2d');
+											var myLineChart_rtuk2 = new Chart(ctx, {
+											    type: 'line',
+											    data: {
+											        labels:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+											        datasets: [{
+											            label: 'today',
+											            data: today,	
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['#00ffcc'],
+											            borderWidth: 1.5
+											        },
+											        {
+											            label: 'yesterday',
+											            data: yesterday,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.9
+											        },
+											        {
+											            label: d2.getDate() + '/' + d2.getMonth() + '/' + d2.getFullYear(),
+											            data: arr2daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.8
+											        },
+											        {
+											            label: d3.getDate() + '/' + d3.getMonth() + '/' + d3.getFullYear(),
+											            data: arr3daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.7
+											        },
+											        {
+											            label: d4.getDate() + '/' + d4.getMonth() + '/' + d4.getFullYear(),
+											            data: arr4daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.6
+											        },
+											        {
+											            label: d5.getDate() + '/' + d5.getMonth() + '/' + d5.getFullYear(),
+											            data: arr5daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.5
+											        },
+											        {
+											            label: d6.getDate() + '/' + d6.getMonth() + '/' + d6.getFullYear(),
+											            data: arr6daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.4
+											        }]
+											    },
+											    options: {
+											    	legend: {
+											    		display: true,
+											    		position: 'top',
+											    		fullWidth: false,
+											    		labels: {
+											                fontColor: '#aaa',
+											                fontSize: 10,
+											                fontStyle: 'normal',
+											                usePointStyle: true
+									 		           }
+											    	},
+											    	tooltips: {
+											    		enabled: true,
+											    		mode: 'nearest',
+											    		displayColors: false,
+											    		titleFontSize: 0,
+											    		titleMarginBottom: 0
+											    	},
+											    	scales: {
+											            xAxes: [{
+											                display: false
+											            }],
+											            yAxes: [{
+											                display: false
+											            }]
+											        },
+											        elements: {
+											        	point: {
+											        		pointStyle: 'circle',
+											        		radius: 2,
+											        		//borderWidth: 0.5
+											        		hitRadius: 10,
+											        		hoverRadius: 2
+											        	}
+											        }
+											    }
+											});
+										};
+									</script>
+								</li>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (US)</a></h3>
+									<p></p>
+
+									<canvas id="myLineChart_rtus" width="100%" height="100%"></canvas>
+									<script>
+										// Get a date object for the current time
+										var d = new Date();
+										// Set it to 7 days ago
+										d.setDate(d.getDate() - 6);
+										// Zero the hours
+										d.setHours(0, 0, 0);
+										// Zero the milliseconds
+										d.setMilliseconds(0);
+										// Get the time value in milliseconds and convert to seconds
+										// console.log(d/1000|0);
+										// console.log(d/1 +' - '+ d);
+
+										var d6 = new Date();
+										d6.setDate(d6.getDate() - 6);
+										d6.setMonth(d6.getMonth() + 1);
+										d6.setFullYear(d6.getFullYear());
+										d6.setHours(0, 0, 0);
+										var d5 = new Date();
+										d5.setDate(d5.getDate() - 5);
+										d5.setMonth(d5.getMonth() + 1);
+										d5.setFullYear(d5.getFullYear());
+										d5.setHours(0, 0, 0);
+										var d4 = new Date();
+										d4.setDate(d4.getDate() - 4);
+										d4.setMonth(d4.getMonth() + 1);
+										d4.setFullYear(d4.getFullYear());
+										d4.setHours(0, 0, 0);
+										var d3 = new Date();
+										d3.setDate(d3.getDate() - 3);
+										d3.setMonth(d3.getMonth() + 1);
+										d3.setFullYear(d3.getFullYear());
+										d3.setHours(0, 0, 0);
+										var d2 = new Date();
+										d2.setDate(d2.getDate() - 2);
+										d2.setMonth(d2.getMonth() + 1);
+										d2.setFullYear(d2.getFullYear());
+										d2.setHours(0, 0, 0);
+
+										$.ajax({
+										  url: 'https://saas.saymon.info/node/api/objects/5b212f5b1b77787888a80461/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  success: callback,
+										  dataType: "json"
+										});
+
+										function callback(data, textStatus, jqXHR){
+											//console.log(data[0].dps[0][1]|0);
+											//console.log(data[0].dps);
+											
+											//v1 to get length
+											//console.log(Object.keys(data[0].dps).length);
+											//v2 to get length
+											length=0;
+											$.each(data[0].dps,function(i){
+											  length++;
+											});
+											//console.log(length);
+
+											var arr6daysago = [];
+											for (var i = 0; i <= 23; i++) {arr6daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr6daysago - '+arr6daysago);
+											var arr5daysago = [];
+											for (var i = 24; i <= 47; i++) {arr5daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr5daysago - '+arr5daysago);
+											var arr4daysago = [];
+											for (var i = 48; i <= 71; i++) {arr4daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr4daysago - '+arr4daysago);
+											var arr3daysago = [];
+											for (var i = 72; i <= 95; i++) {arr3daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr3daysago - '+arr3daysago);
+											var arr2daysago = [];
+											for (var i = 96; i <= 119; i++) {arr2daysago.push(data[0].dps[i][1]|0);};
+											//console.log('arr2daysago - '+arr2daysago);		
+											var yesterday = [];
+											for (var i = 120; i <= 143; i++) {yesterday.push(data[0].dps[i][1]|0);};
+											//console.log('yesterday - '+yesterday);
+											var today = [];
+											for (var i = 144; i <= length-1; i++) {today.push(data[0].dps[i][1]|0);};
+											//console.log('today - '+today);
+
+											var ctx = document.getElementById("myLineChart_rtus").getContext('2d');
+											var myLineChart_rtus = new Chart(ctx, {
+											    type: 'line',
+											    data: {
+											        labels:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+											        datasets: [{
+											            label: 'today',
+											            data: today,	
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['#00ffcc'],
+											            borderWidth: 1.5
+											        },
+											        {
+											            label: 'yesterday',
+											            data: yesterday,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.9
+											        },
+											        {
+											            label: d2.getDate() + '/' + d2.getMonth() + '/' + d2.getFullYear(),
+											            data: arr2daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.8
+											        },
+											        {
+											            label: d3.getDate() + '/' + d3.getMonth() + '/' + d3.getFullYear(),
+											            data: arr3daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.7
+											        },
+											        {
+											            label: d4.getDate() + '/' + d4.getMonth() + '/' + d4.getFullYear(),
+											            data: arr4daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.6
+											        },
+											        {
+											            label: d5.getDate() + '/' + d5.getMonth() + '/' + d5.getFullYear(),
+											            data: arr5daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.5
+											        },
+											        {
+											            label: d6.getDate() + '/' + d6.getMonth() + '/' + d6.getFullYear(),
+											            data: arr6daysago,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,99,132,1)'],
+											            borderWidth: 0.4
+											        }]
+											    },
+											    options: {
+											    	legend: {
+											    		display: true,
+											    		position: 'top',
+											    		fullWidth: false,
+											    		labels: {
+											                fontColor: '#aaa',
+											                fontSize: 10,
+											                fontStyle: 'normal',
+											                usePointStyle: true
+									 		           }
+											    	},
+											    	tooltips: {
+											    		enabled: true,
+											    		mode: 'nearest',
+											    		displayColors: false,
+											    		titleFontSize: 0,
+											    		titleMarginBottom: 0
+											    	},
+											    	scales: {
+											            xAxes: [{
+											                display: false
+											            }],
+											            yAxes: [{
+											                display: false
+											            }]
+											        },
+											        elements: {
+											        	point: {
+											        		pointStyle: 'circle',
+											        		radius: 2,
+											        		//borderWidth: 0.5
+											        		hitRadius: 10,
+											        		hoverRadius: 2
+											        	}
+											        }
+											    }
+											});
+										};
+									</script>
+								</li>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms</a></h3>
+									<p></p>
+
+									<canvas id="myLineChart_rt" width="100%" height="100%"></canvas>
+									<script>
+										// Get a date object for the current time
+										var d = new Date();
+										// Set it to 7 days ago
+										d.setDate(d.getDate() - 1);
+										// Zero the hours
+										d.setHours(0, 0, 0);
+										// Zero the milliseconds
+										d.setMilliseconds(0);
+										// Get the time value in milliseconds and convert to seconds
+										// console.log(d/1000|0);
+										// console.log(d/1 +' - '+ d);
+
+										$.ajax({
+										  url: 'https://saas.saymon.info/node/api/objects/5b212f5b1b77787888a80461/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  dataType: "json",
+										  success: function callback_us (data_us){
+
+										  	$.ajax({
+											  url: 'https://saas.saymon.info/node/api/objects/5b212f591b77787888a80264/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+											  dataType: "json",
+											  success: function callback_uk1 (data_uk1){
+
+											  	$.ajax({
+												  url: 'https://saas.saymon.info/node/api/objects/5b212f5a1b77787888a8038f/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+												  dataType: "json",
+												  success: function callback_uk2 (data_uk2){
+
+												  	callback(data_us, data_uk1, data_uk2)
+												  	
+												  }
+												});
+											  	
+											  }
+											});
+
+										  }
+										});
+
+										function callback(data_us, data_uk1, data_uk2){
+											//console.log(data_us[0].dps[0][1]|0);
+											//console.log(data_us[0].dps);
+											
+											//v1 to get length
+											//console.log(Object.keys(data_us[0].dps).length);
+											//v2 to get length
+											length=0;
+											$.each(data_us[0].dps,function(i){
+											  length++;
+											});
+											//console.log(length);
+											
+											var yesterday_us = [];
+											for (var i = 0; i <= 23; i++) {yesterday_us.push(data_us[0].dps[i][1]|0);};
+											//console.log('yesterday_us - '+yesterday_us);
+											var today_us = [];
+											for (var i = 24; i <= length-1; i++) {today_us.push(data_us[0].dps[i][1]|0);};
+											//console.log('today_us - '+today_us);
+
+											var yesterday_uk1 = [];
+											for (var i = 0; i <= 23; i++) {yesterday_uk1.push(data_uk1[0].dps[i][1]|0);};
+											//console.log('yesterday_uk1 - '+yesterday_uk1);
+											var today_uk1 = [];
+											for (var i = 24; i <= length-1; i++) {today_uk1.push(data_uk1[0].dps[i][1]|0);};
+											//console.log('today_uk1 - '+today_uk1);
+
+											var yesterday_uk2 = [];
+											for (var i = 0; i <= 23; i++) {yesterday_uk2.push(data_uk2[0].dps[i][1]|0);};
+											//console.log('yesterday_uk2 - '+yesterday_uk2);
+											var today_uk2 = [];
+											for (var i = 24; i <= length-1; i++) {today_uk2.push(data_uk2[0].dps[i][1]|0);};
+											//console.log('today_uk2 - '+today_uk2);
+
+											var ctx = document.getElementById("myLineChart_rt").getContext('2d');
+											var myLineChart_rt = new Chart(ctx, {
+											    type: 'line',
+											    data: {
+											        labels:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+											        datasets: [{
+											            label: 'today, US',
+											            data: today_us,	
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,204,0,1)'],
+											            borderWidth: 1.5
+											        },
+											        {
+											            label: 'yesterday, US',
+											            data: yesterday_us,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,204,0,0.5)'],
+											            borderWidth: 0.9
+											        },
+											        {
+											            label: 'today, UK1',
+											            data: today_uk1,	
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,76,0,1)'],
+											            borderWidth: 1.5
+											        },
+											        {
+											            label: 'yesterday, UK1',
+											            data: yesterday_uk1,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(255,76,0,0.5)'],
+											            borderWidth: 0.9
+											        },
+											        {
+											            label: 'today, UK2',
+											            data: today_uk2,	
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(179,255,0,1)'],
+											            borderWidth: 1.5
+											        },
+											        {
+											            label: 'yesterday, UK2',
+											            data: yesterday_uk2,
+											            backgroundColor: ['rgba(255, 99, 132, 0)'],
+											            borderColor: ['rgba(179,255,0,0.5)'],
+											            borderWidth: 0.9
+											        }]
+											    },
+											    options: {
+											    	legend: {
+											    		display: true,
+											    		position: 'top',
+											    		fullWidth: false,
+											    		labels: {
+											                fontColor: '#aaa',
+											                fontSize: 10,
+											                fontStyle: 'normal',
+											                usePointStyle: true
+									 		           }
+											    	},
+											    	tooltips: {
+											    		enabled: true,
+											    		mode: 'nearest',
+											    		displayColors: false,
+											    		titleFontSize: 0,
+											    		titleMarginBottom: 0
+											    	},
+											    	scales: {
+											            xAxes: [{
+											                display: false
+											            }],
+											            yAxes: [{
+											                display: false
+											            }]
+											        },
+											        elements: {
+											        	point: {
+											        		pointStyle: 'circle',
+											        		radius: 2,
+											        		hitRadius: 10,
+											        		hoverRadius: 2
+											        	}
+											        }
+											    }
+											});
+										};
+									</script>
+								</li>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="dns.html">DNS Expiration, days</a></h3>
+									<script type="text/javascript">
+										$.ajax({
+										    dataType: "json",
+										    url: "https://saas.saymon.info/node/api/metric-token/1eb367a2-bada-4412-bddc-a0a8e2843064/stat",
+										    success: function (data) {
+										        //console.log(data.value);
+										        $("#dns_exp").append(data.value);
+										    }
+										});
+									</script>
+									<p id="dns_exp"></p>
+								</li>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="ssl_tls.html">SSL Expiration, days</a></h3>
+									<script type="text/javascript">
+										$.ajax({
+										    dataType: "json",
+										    url: "https://saas.saymon.info/node/api/metric-token/3713ddc2-1bbf-45d5-9d0c-74d1c3c22ccc/stat",
+										    success: function (data) {
+										        //console.log(data.value);
+										        $("#ssl_exp").append(data.value);
+										    }
+										});
+									</script>
+									<p id="ssl_exp"></p>
+								</li>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (US)</a></h3>
+									<script type="text/javascript">
+										$.ajax({
+										    dataType: "json",
+										    url: "https://saas.saymon.info/node/api/metric-token/170c79af-fc52-4c2c-9bbd-e847700621d0/stat",
+										    success: function (data_sc) {
+											    $.ajax({
+											    dataType: "json",
+											    url: "https://saas.saymon.info/node/api/metric-token/7ec96e53-0cb8-4927-ad0e-c63a8e6872f9/stat",
+											    success: function (data_st) {
+											        //console.log(data_st.value);
+											        $("#http_status_us").append(data_sc.value + " / " + data_st.value);
+											    }
+												});
+										    }
+										});
+									</script>
+									<p id="http_status_us"></p>
+								</li>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (UK)</a></h3>
+									<script type="text/javascript">
+										$.ajax({
+										    dataType: "json",
+										    url: "https://saas.saymon.info/node/api/metric-token/0a469210-4cb0-48ea-9178-256e1b7b07d3/stat",
+										    success: function (data_sc1) {
+											    $.ajax({
+											    dataType: "json",
+											    url: "https://saas.saymon.info/node/api/metric-token/834f664e-8ceb-4a7a-88b2-db9eaa58a15d/stat",
+											    success: function (data_st1) {
+											        //console.log(data_st1.value);
+											        $("#http_status_uk1").append(data_sc1.value + ' / ' + data_st1.value + ' (UK1) <br />');
+											    }
+												});
+										    }
+										});
+											$.ajax({
+										    dataType: "json",
+										    url: "https://saas.saymon.info/node/api/metric-token/b78e6b10-785f-4192-87ab-a52e1cca251a/stat",
+										    success: function (data_sc1) {
+											    $.ajax({
+											    dataType: "json",
+											    url: "https://saas.saymon.info/node/api/metric-token/bd3f35cb-bd26-40aa-a67e-ba1758125dba/stat",
+											    success: function (data_st1) {
+											        //console.log(data_st1.value);
+											        $("#http_status_uk1").append(data_sc1.value + ' / ' + data_st1.value + ' (UK2) <br />');
+											    }
+												});
+										    }
+										});
+									</script>
+									<p id="http_status_uk1"></p>
+								</li>
+<!--
+								<li class="icon fa-code">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (UK2)</a></h3>
+									<p></p>
+								</li>
+-->
+							</ul>
+
+							
+<!--
+							<p>Current status of apSiteDown.com service.</p>
+							<ul class="features">
+								<li class="icon fa-laptop">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="dns.html">DNS Expiration, days</a></h3>
+									<p></p>
+								</li>
+								<li class="icon fa-laptop">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="ssl_tls.html">SSL Expiration, days</a></h3>
+									<p></p>
+								</li>
+								<li class="icon fa-code">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (UK1)</a></h3>
+									<p></p>
+								</li>
+								<li class="icon fa-heart-o">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (UK1)</a></h3>
+									<p></p>
+								</li>
+								<li class="icon fa-code">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (UK2)</a></h3>
+									<p></p>
+								</li>
+								<li class="icon fa-heart-o">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (UK2)</a></h3>
+									<p></p>
+								</li>
+								<li class="icon fa-code">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (US)</a></h3>
+									<p></p>
+								</li>
+								<li class="icon fa-heart-o">
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (US)</a></h3>
+									<p></p>
+								</li>
+							</ul>
+-->
+
+						</div>
+					</section>
+
+				<!-- CTA -->
+					<section id="cta" class="wrapper style4">
+						<div class="inner">
+							<header>
+								<h2>Start your free trial now</h2>
+								<p>Stop worrying about your website and services availability today. With no credit card.</p>
+							</header>
+							<ul class="actions vertical">
+								<li><a href="#" class="button fit special">Sign Up</a></li>
+								<li><a href="index.html" class="button fit">Learn More</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright" style="text-transform:initial; letter-spacing:unset">
+							<li>&copy; apSiteDown</li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
