@@ -18,7 +18,10 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 	</head>
+
 	<body>
 
 		<!-- Page Wrapper -->
@@ -51,6 +54,68 @@
 						</nav>
 					</header>
 
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#urlimput").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#runcheck").click();
+    }
+  });
+  $('#runcheck').click(function() {
+    console.log('input ' + $('#urlimput').val());
+    var url2check=$('#urlimput').val();
+    $("#url_result").html('Waiting data for ' + url2check);
+	$("#dns_exp").html('waiting data...');
+	$("#ssl_exp").html('waiting data...');
+	$("#http_status_us").html('waiting data...');
+	$("#response_time_us").html('waiting data...');
+	$("#http_status_uk1").html('waiting data...');
+	$("#response_time_uk1").html('waiting data...');
+	$("#http_status_uk2").html('waiting data...');
+	$("#response_time_uk2").html('waiting data...');
+	console.log('url2check ' + url2check);
+	$.ajax({
+	    dataType: "json",
+	    url: "https://sf.saymon.info/asd/index.html?url="+url2check,
+	    success: function (data) {
+	        console.log(data);
+	        $("#url_result").html(data.result);
+	        $("#dns_exp").html(data.dns);
+	        $("#ssl_exp").html(data.ssl);
+	        $("#http_status_us").html(data.us.status_code);
+	        $("#response_time_us").html(data.us.response_time);
+	        $("#http_status_uk1").html(data.uk1.status_code);
+	        $("#response_time_uk1").html(data.uk1.response_time);
+	        $("#http_status_uk2").html(data.uk2.status_code);
+	        $("#response_time_uk2").html(data.uk2.response_time);
+	        console.log('url_checked ' + url2check);
+	    }
+	});    
+  });
+});
+
+	
+</script>
+<!--
+<script type="text/javascript">
+	$.ajax({
+	    dataType: "json",
+	    url: "https://sf.saymon.info/asd/index.html?url=saymon.info",
+	    success: function (data) {
+	        console.log(data);
+	        $("#url_result").append(data.result);
+	        $("#dns_exp").append(data.dns);
+	        $("#ssl_exp").append(data.ssl);
+	        $("#http_status_us").append(data.us.status_code);
+	        $("#response_time_us").append(data.us.response_time);
+	        $("#http_status_uk1").append(data.uk1.status_code);
+	        $("#response_time_uk1").append(data.uk1.response_time);
+	        $("#http_status_uk2").append(data.uk2.status_code);
+	        $("#response_time_uk2").append(data.uk2.response_time);
+	    }
+	});
+</script>
+-->
 				<!-- Main -->
 					<article id="main">
 						<header>
@@ -65,14 +130,30 @@
 
 								<div class="row uniform">
 									<div class="6u 12u$(xsmall)">
-										<input type="text" name="demo-name" id="demo-name" value="" placeholder="http(s)://" />
+										<input type="text" name="url2check" id="urlimput" value="https://apsitedown.com" placeholder="http(s)://" />
 									</div>
 									<div class="6u$ 12u$(xsmall)">
-										<a href="#" class="button special disabled fit">Run Instant Check</a>
+										<a class="button special fit" id="runcheck">Run Instant Check</a>
 									</div>
 								</div>
 
 							</div>
+
+<!--
+<div id="search">
+  <input id="term" type="text" value="enter your search" />
+  <button id="hit" type="button" name="">Search</button>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#hit').click(function() {
+    alert($('#term').val());
+  });
+});
+</script>
+-->
+
 						</section>
 
 						<section id="three" class="wrapper style3 special">
@@ -80,39 +161,40 @@
 							<header class="major">
 								<h2>Your Website Status</h2>
 								<p>Current status of your website.</p>
+								<p  id="url_result"></p>
 							</header>
 							<ul class="features">
-								<li class="icon fa-laptop">
+								<li>
 									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="dns.html">DNS Expiration, days</a></h3>
-									<p></p>
+									<p id="dns_exp"></p>
 								</li>
-								<li class="icon fa-laptop">
+								<li>
 									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="ssl_tls.html">SSL Expiration, days</a></h3>
-									<p></p>
+									<p id="ssl_exp"></p>
 								</li>
-								<li class="icon fa-code">
-									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (UK1)</a></h3>
-									<p></p>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">US HTTP Status</a></h3>
+									<p id="http_status_us"></p>
 								</li>
-								<li class="icon fa-heart-o">
-									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (UK1)</a></h3>
-									<p></p>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">US Response time, sec.</a></h3>
+									<p id="response_time_us"></p>
 								</li>
-								<li class="icon fa-code">
-									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (UK2)</a></h3>
-									<p></p>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">UK1 HTTP Status</a></h3>
+									<p id="http_status_uk1"></p>
 								</li>
-								<li class="icon fa-heart-o">
-									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (UK2)</a></h3>
-									<p></p>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">UK1 Response time, sec.</a></h3>
+									<p id="response_time_uk1"></p>
 								</li>
-								<li class="icon fa-code">
-									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">HTTP Status (RU)</a></h3>
-									<p></p>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="http_status_codes.html">UK2 HTTP Status</a></h3>
+									<p id="http_status_uk2"></p>
 								</li>
-								<li class="icon fa-heart-o">
-									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">Response time, ms (RU)</a></h3>
-									<p></p>
+								<li>
+									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="response_time.html">UK2 Response time, sec.</a></h3>
+									<p id="response_time_uk2"></p>
 								</li>
 							</ul>
 						</div>
