@@ -55,74 +55,57 @@
 					</header>
 
 <script type="text/javascript">
-$(document).ready(function() {
-  $("#urlimput").keyup(function(event) {
-    if (event.keyCode === 13) {
-        $("#runcheck").click();
-    }
-  });
-  $('#runcheck').click(function() {
-    console.log('input ' + $('#urlimput').val());
-    var url2check=$('#urlimput').val();
-    $("#url_result").html('Waiting data for ' + url2check);
-	$("#dns_exp").html('waiting data...');
-	$("#ssl_exp").html('waiting data...');
-	$("#http_status_us").html('waiting data...');
-	$("#response_time_us").html('waiting data...');
-	$("#http_status_uk1").html('waiting data...');
-	$("#response_time_uk1").html('waiting data...');
-	$("#http_status_uk2").html('waiting data...');
-	$("#response_time_uk2").html('waiting data...');
-	console.log('url2check ' + url2check);
-	$.ajax({
-	    dataType: "json",
-	    url: "https://sf.saymon.info/asd/index.html?url="+url2check,
-	    success: function (data) {
-	        console.log(data);
-	        $("#url_result").html(data.result);
-	        $("#dns_exp").html(data.dns);
-	        $("#ssl_exp").html(data.ssl);
-	        $("#http_status_us").html(data.us.status_code);
-	        $("#response_time_us").html(data.us.response_time);
-	        $("#http_status_uk1").html(data.uk1.status_code);
-	        $("#response_time_uk1").html(data.uk1.response_time);
-	        $("#http_status_uk2").html(data.uk2.status_code);
-	        $("#response_time_uk2").html(data.uk2.response_time);
-	        console.log('url_checked ' + url2check);
+	$(document).ready(function() {
+	  $("#urlimput").keyup(function(event) {
+	    if (event.keyCode === 13) {
+	        $("#runcheck").click();
 	    }
-	});    
-  });
-});
-
-	
-</script>
-<!--
-<script type="text/javascript">
-	$.ajax({
-	    dataType: "json",
-	    url: "https://sf.saymon.info/asd/index.html?url=saymon.info",
-	    success: function (data) {
-	        console.log(data);
-	        $("#url_result").append(data.result);
-	        $("#dns_exp").append(data.dns);
-	        $("#ssl_exp").append(data.ssl);
-	        $("#http_status_us").append(data.us.status_code);
-	        $("#response_time_us").append(data.us.response_time);
-	        $("#http_status_uk1").append(data.uk1.status_code);
-	        $("#response_time_uk1").append(data.uk1.response_time);
-	        $("#http_status_uk2").append(data.uk2.status_code);
-	        $("#response_time_uk2").append(data.uk2.response_time);
-	    }
+	  });
+	  $('#runcheck').click(function() {
+	    console.log('input ' + $('#urlimput').val());
+	    $('html, body').animate({
+	        scrollTop: $("#three").offset().top
+	    }, 300);
+	    var url2check=$('#urlimput').val();
+	    $("#url_result").html('Waiting data for ' + url2check);
+		$("#dns_exp").html('waiting data...');
+		$("#ssl_exp").html('waiting data...');
+		$("#http_status_us").html('waiting data...');
+		$("#response_time_us").html('waiting data...');
+		$("#http_status_uk1").html('waiting data...');
+		$("#response_time_uk1").html('waiting data...');
+		$("#http_status_uk2").html('waiting data...');
+		$("#response_time_uk2").html('waiting data...');
+		$("#results_ul").show( "slow", function(){});
+		console.log('url2check ' + url2check);
+		$.ajax({
+		    dataType: "json",
+		    url: "https://sf.saymon.info/asd/index.html?url="+url2check,
+		    success: function (data) {
+		        console.log(data);
+		        $("#url_result").html(data.result);
+		        $("#dns_exp").html(data.dns);
+		        $("#ssl_exp").html(data.ssl);
+		        $("#http_status_us").html(data.us.status_code);
+		        $("#response_time_us").html(data.us.response_time);
+		        $("#http_status_uk1").html(data.uk1.status_code);
+		        $("#response_time_uk1").html(data.uk1.response_time);
+		        $("#http_status_uk2").html(data.uk2.status_code);
+		        $("#response_time_uk2").html(data.uk2.response_time);
+		        console.log('url_checked ' + url2check);
+		    }
+		});    
+	  });
 	});
 </script>
--->
+
 				<!-- Main -->
 					<article id="main">
 						<header>
 							<h2>Instant Check</h2>
 							<p>Perform the instant check of your website or service<br />availability, response time, DNS and SSL expiration</p>
 						</header>
-						<section class="wrapper style5">
+<!--						<section class="wrapper style5">
 							<div class="inner">
 
 								<h3>How to use</h3>
@@ -139,31 +122,24 @@ $(document).ready(function() {
 
 							</div>
 
-<!--
-<div id="search">
-  <input id="term" type="text" value="enter your search" />
-  <button id="hit" type="button" name="">Search</button>
-</div>
-
-<script type="text/javascript">
-$(document).ready(function() {
-  $('#hit').click(function() {
-    alert($('#term').val());
-  });
-});
-</script>
--->
-
 						</section>
-
+-->
 						<section id="three" class="wrapper style3 special">
 						<div class="inner">
 							<header class="major">
-								<h2>Your Website Status</h2>
-								<p>Current status of your website.</p>
-								<p  id="url_result"></p>
+
+								<div class="row uniform">
+									<div class="6u 12u$(xsmall)">
+										<input type="text" name="url2check" id="urlimput" value="https://apsitedown.com" placeholder="http(s)://" />
+									</div>
+									<div class="6u$ 12u$(xsmall)">
+										<a class="button special fit" id="runcheck">Run Instant Check</a>
+									</div>
+								</div>
+<!--							<h2>Website Status</h2>
+-->								<br /><p id="url_result"></p>
 							</header>
-							<ul class="features">
+							<ul id="results_ul" class="features" style="display: none">
 								<li>
 									<h3 style="text-transform:initial; font-weight:400; letter-spacing:0em"><a href="dns.html">DNS Expiration, days</a></h3>
 									<p id="dns_exp"></p>
