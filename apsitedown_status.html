@@ -106,7 +106,7 @@
 										d2.setHours(0, 0, 0);
 
 										$.ajax({
-										  url: 'https://saas.saymon.info/node/api/objects/5b212f591b77787888a80264/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f436a8/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  success: callback,
 										  dataType: "json"
 										});
@@ -287,7 +287,7 @@
 										d2.setHours(0, 0, 0);
 
 										$.ajax({
-										  url: 'https://saas.saymon.info/node/api/objects/5b212f5a1b77787888a8038f/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f43648/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  success: callback,
 										  dataType: "json"
 										});
@@ -468,7 +468,7 @@
 										d2.setHours(0, 0, 0);
 
 										$.ajax({
-										  url: 'https://saas.saymon.info/node/api/objects/5b212f5b1b77787888a80461/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a35536beb01a1f43601/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  success: callback,
 										  dataType: "json"
 										});
@@ -623,17 +623,17 @@
 										// console.log(d/1 +' - '+ d);
 
 										$.ajax({
-										  url: 'https://saas.saymon.info/node/api/objects/5b212f5b1b77787888a80461/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a35536beb01a1f43601/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  dataType: "json",
 										  success: function callback_us (data_us){
 
 										  	$.ajax({
-											  url: 'https://saas.saymon.info/node/api/objects/5b212f591b77787888a80264/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+											  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f436a8/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 											  dataType: "json",
 											  success: function callback_uk1 (data_uk1){
 
 											  	$.ajax({
-												  url: 'https://saas.saymon.info/node/api/objects/5b212f5a1b77787888a8038f/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+												  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f43648/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 												  dataType: "json",
 												  success: function callback_uk2 (data_uk2){
 
@@ -775,7 +775,7 @@
 									<script type="text/javascript">
 										$.ajax({
 										    dataType: "json",
-										    url: "https://saas.saymon.info/node/api/metric-token/1eb367a2-bada-4412-bddc-a0a8e2843064/stat",
+										    url: "https://admin.apsitedown.com/node/api/metric-token/be08f6c0-8900-4c97-935f-3391d8d5158c/stat",
 										    success: function (data) {
 										        //console.log(data.value);
 										        $("#dns_exp").append(data.value);
@@ -789,7 +789,7 @@
 									<script type="text/javascript">
 										$.ajax({
 										    dataType: "json",
-										    url: "https://saas.saymon.info/node/api/metric-token/3713ddc2-1bbf-45d5-9d0c-74d1c3c22ccc/stat",
+										    url: "https://admin.apsitedown.com/node/api/metric-token/6b271c21-42dd-49d1-a772-36df852bea9d/stat",
 										    success: function (data) {
 										        //console.log(data.value);
 										        $("#ssl_exp").append(data.value);
@@ -803,11 +803,11 @@
 									<script type="text/javascript">
 										$.ajax({
 										    dataType: "json",
-										    url: "https://saas.saymon.info/node/api/metric-token/170c79af-fc52-4c2c-9bbd-e847700621d0/stat",
+										    url: "https://admin.apsitedown.com/node/api/metric-token/9e7b31b9-5342-40ec-88b0-d15c56bbfc42/stat",
 										    success: function (data_sc) {
 											    $.ajax({
 											    dataType: "json",
-											    url: "https://saas.saymon.info/node/api/metric-token/7ec96e53-0cb8-4927-ad0e-c63a8e6872f9/stat",
+											    url: "https://admin.apsitedown.com/node/api/metric-token/5ce74f21-ac0c-4d34-9dd1-a26ec8978472/stat",
 											    success: function (data_st) {
 											        //console.log(data_st.value);
 											        $("#http_status_us").append(data_sc.value + " / " + data_st.value);
@@ -823,11 +823,11 @@
 									<script type="text/javascript">
 										$.ajax({
 										    dataType: "json",
-										    url: "https://saas.saymon.info/node/api/metric-token/0a469210-4cb0-48ea-9178-256e1b7b07d3/stat",
+										    url: "https://admin.apsitedown.com/node/api/metric-token/36da7276-01c0-411d-9d1a-96d5abc16761/stat",
 										    success: function (data_sc1) {
 											    $.ajax({
 											    dataType: "json",
-											    url: "https://saas.saymon.info/node/api/metric-token/834f664e-8ceb-4a7a-88b2-db9eaa58a15d/stat",
+											    url: "https://admin.apsitedown.com/node/api/metric-token/ac7f394e-551a-4409-aa59-8ef26d07f4a6/stat",
 											    success: function (data_st1) {
 											        //console.log(data_st1.value);
 											        $("#http_status_uk1").append(data_sc1.value + ' / ' + data_st1.value + ' (UK1) <br />');
@@ -837,11 +837,11 @@
 										});
 											$.ajax({
 										    dataType: "json",
-										    url: "https://saas.saymon.info/node/api/metric-token/b78e6b10-785f-4192-87ab-a52e1cca251a/stat",
+										    url: "https://admin.apsitedown.com/node/api/metric-token/9c1ea0ab-deff-4ded-b3c7-902eba8bb2e8/stat",
 										    success: function (data_sc1) {
 											    $.ajax({
 											    dataType: "json",
-											    url: "https://saas.saymon.info/node/api/metric-token/bd3f35cb-bd26-40aa-a67e-ba1758125dba/stat",
+											    url: "https://admin.apsitedown.com/node/api/metric-token/65a42b2b-323c-435d-a711-d20b5d503333/stat",
 											    success: function (data_st1) {
 											        //console.log(data_st1.value);
 											        $("#http_status_uk1").append(data_sc1.value + ' / ' + data_st1.value + ' (UK2) <br />');
