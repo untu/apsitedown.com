@@ -106,7 +106,7 @@
 										d2.setHours(0, 0, 0);
 
 										$.ajax({
-										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f436a8/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f436a8/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg-zero&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  success: callback,
 										  dataType: "json"
 										});
@@ -287,7 +287,7 @@
 										d2.setHours(0, 0, 0);
 
 										$.ajax({
-										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f43648/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f43648/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg-zero&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  success: callback,
 										  dataType: "json"
 										});
@@ -468,7 +468,7 @@
 										d2.setHours(0, 0, 0);
 
 										$.ajax({
-										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a35536beb01a1f43601/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a35536beb01a1f43601/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg-zero&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  success: callback,
 										  dataType: "json"
 										});
@@ -623,17 +623,17 @@
 										// console.log(d/1 +' - '+ d);
 
 										$.ajax({
-										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a35536beb01a1f43601/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+										  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a35536beb01a1f43601/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg-zero&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 										  dataType: "json",
 										  success: function callback_us (data_us){
 
 										  	$.ajax({
-											  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f436a8/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+											  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f436a8/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg-zero&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 											  dataType: "json",
 											  success: function callback_uk1 (data_uk1){
 
 											  	$.ajax({
-												  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f43648/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
+												  url: 'https://admin.apsitedown.com/node/api/objects/5b6a8a37536beb01a1f43648/history?metrics=responseTimeMs&from='+d/1+'&downsample=1h-avg-zero&auth-token=0b97877c-f839-4aad-8bc4-913505e5ad31',
 												  dataType: "json",
 												  success: function callback_uk2 (data_uk2){
 
