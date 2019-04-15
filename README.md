@@ -1,2 +1,2 @@
-# apsitedown.com
-apsitedown.com web 
+# appsitedown.com
+appsitedown.com website
